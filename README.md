@@ -5,7 +5,7 @@
 <div align="center">
 
 **ENZOX**  
-*A Powerful VPN Sniffer Tool optimized for Termux environments*
+***A Powerful VPN Sniffer Tool optimized for Termux environments***
 
 </div>
 
