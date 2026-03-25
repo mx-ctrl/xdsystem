@@ -3,4 +3,4 @@
 ## Install
 
 ```bash
-pkg update -y && pkg install -y git && git clone https://github.com/mx-ctrl/xdsystem.git && cd xdsystem && bash install.sh
+pkg up -y && pkg install -y curl && bash <(curl -fsSL https://raw.githubusercontent.com/mx-ctrl/xdsystem/main/install.sh)
