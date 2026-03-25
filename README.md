@@ -4,3 +4,8 @@
 
 ```bash
 curl -sL https://raw.githubusercontent.com/mx-ctrl/xdsystem/main/install.sh | bash
+
+ذ
+## Run
+```
+ ./enzox
