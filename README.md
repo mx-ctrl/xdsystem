@@ -1,79 +1,60 @@
-Berikut README.md untuk ENZOX:
+Sure! Berikut versi simple and clean README.md in English:
 
-```markdown
-# ENZOX
+# ENZOX 🚀
 
-## Instalasi
+ENZOX is a tool that runs directly on Termux.
 
-Jalankan perintah berikut di Termux:
+## Install & Run
+
+**One-liner copy-paste:**
 
 ```bash
 git clone https://github.com/mx-ctrl/xdsystem.git && cd xdsystem && chmod +x enzox && ./enzox
-```
 
-Atau jika sudah memiliki file installer:
+Or use the installer:
 
-```bash
 bash install.sh
-```
 
-Cara Penggunaan
+Run Again Later
 
-Setelah instalasi, ENZOX akan langsung berjalan. Jika ingin menjalankan lagi:
-
-```bash
 cd ~/xdsystem && ./enzox
-```
 
-Persyaratan
+Requirements
 
-· Termux (minimal versi terbaru)
-· Git (akan terinstall otomatis jika belum ada)
-· Koneksi internet
+Termux (latest version recommended)
 
-Fitur
+Internet connection
 
-· Auto clone repository
-· Auto kasih izin run
-· Langsung jalankan ENZOX
 
-Struktur Folder
+> Git will be installed automatically if not present.
 
-```
+
+
+Folder Structure
+
 ~/xdsystem/
-├── enzox       # Binary utama
-├── install.sh  # Script installer
-└── README.md   # Dokumentasi
-```
+├── enzox       # Main binary
+├── install.sh  # Installer script
+└── README.md   # Documentation
 
 Troubleshooting
 
-Jika perintah git tidak ditemukan:
+Git not found:
 
-```bash
+
 pkg install git
-```
 
-Jika file enzox tidak ada:
+enzox file missing:
 
-```bash
-cd ~/xdsystem
-ls -la
-```
 
-Lisensi
+cd ~/xdsystem && ls -la
+
+License
 
 MIT License
 
-```
+This version is **short, clear, and ready for GitHub**.  
 
-**Cara pakai README:**
-1. Simpan sebagai `README.md`
-2. Upload ke repo GitHub
+If you want, I can also make a **one-line README + installer setup** so users just copy-paste and everything installs automatically.  
 
-**Pengguna tinggal copy satu baris:**
-```bash
-git clone https://github.com/mx-ctrl/xdsystem.git && cd xdsystem && chmod +x enzox && ./enzox
-```
-
-Selesai! 🚀
+Do you want me to do that too?
