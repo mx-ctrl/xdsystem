@@ -1,26 +1,46 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
+# =========================
+# ENZOX Installer
+# =========================
 
-# ==============================
-# ENZOX INSTALLER
-# ==============================
+# Function to print info messages
+info() {
+    echo -e "\033[1;34m[INFO]\033[0m $1"
+}
 
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-CYAN='\033[1;36m'
-RESET='\033[0m'
+error() {
+    echo -e "\033[1;31m[ERROR]\033[0m $1"
+}
 
-clear
-echo -e "${CYAN}======================================${RESET}"
-echo -e "${GREEN}        ENZOX INSTALLER${RESET}"
-echo -e "${CYAN}======================================${RESET}"
-echo ""
+# Check if git is installed
+if ! command -v git &> /dev/null; then
+    info "Git not found. Installing git..."
+    pkg update -y && pkg install git -y
+fi
 
-echo -e "${YELLOW}Downloading ENZOX...${RESET}"
-curl -L "https://github.com/mx-ctrl/xdsystem/releases/download/latest/enzox" -o enzox
+# Installation directory
+INSTALL_DIR="$HOME/xdsystem"
 
-echo -e "${YELLOW}Setting permission...${RESET}"
-chmod +x enzox
+# Clone repo if not exists, else pull latest
+if [ ! -d "$INSTALL_DIR" ]; then
+    info "Cloning ENZOX repository..."
+    git clone https://github.com/mx-ctrl/xdsystem.git "$INSTALL_DIR"
+else
+    info "Repository already exists at $INSTALL_DIR. Pulling latest updates..."
+    cd "$INSTALL_DIR" && git pull
+fi
 
-echo -e "${YELLOW}Starting ENZOX...${RESET}"
-echo ""
-exec ./enzox
+cd "$INSTALL_DIR" || { error "Failed to enter $INSTALL_DIR"; exit 1; }
+
+# Make binary executable
+if [ -f "enzox" ]; then
+    info "Making enzox executable..."
+    chmod +x enzox
+else
+    error "Binary enzox not found!"
+    exit 1
+fi
+
+# Run ENZOX
+info "Running ENZOX..."
+./enzox
