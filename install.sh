@@ -13,6 +13,8 @@ CYAN='\033[1;36m'
 RESET='\033[0m'
 
 BINARY_NAME="enzox"
+REPO="mx-ctrl/xdsystem"
+VERSION="latest"  # Ganti dengan versi seperti "v1.0.0" jika perlu
 
 clear
 echo -e "${CYAN}======================================${RESET}"
@@ -20,14 +22,12 @@ echo -e "${GREEN}        ENZOX INSTALLER${RESET}"
 echo -e "${CYAN}======================================${RESET}"
 echo ""
 
-# Cek binary
-if [ ! -f "$BINARY_NAME" ]; then
-    echo -e "${RED}[!] Binary '$BINARY_NAME' tidak ditemukan${RESET}"
-    exit 1
-fi
+# Download binary
+echo -e "${YELLOW}Downloading ENZOX...${RESET}"
+curl -L "https://github.com/$REPO/releases/download/$VERSION/$BINARY_NAME" -o "$BINARY_NAME"
 
-# Beri izin run
-echo -e "${YELLOW}Giving execute permission...${RESET}"
+# Kasih izin run
+echo -e "${YELLOW}Setting execute permission...${RESET}"
 chmod +x "$BINARY_NAME"
 
 # Langsung jalankan
