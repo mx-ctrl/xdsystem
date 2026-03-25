@@ -6,7 +6,7 @@
 
 set -e
 
-# Warna output
+# Warna
 RED='\033[1;31m'
 GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
@@ -22,38 +22,38 @@ echo -e "${GREEN}        ENZOX INSTALLER${RESET}"
 echo -e "${CYAN}======================================${RESET}"
 echo ""
 
-# Update & install package dasar
-echo -e "${YELLOW}[1/5] Updating & installing packages...${RESET}"
-pkg update -y >/dev/null 2>&1
-pkg install -y golang curl file git >/dev/null 2>&1
-
-# Storage permission
-echo -e "${YELLOW}[2/5] Requesting storage permission...${RESET}"
-termux-setup-storage >/dev/null 2>&1 || true
-sleep 1
-
-# Folder binary
-echo -e "${YELLOW}[3/5] Preparing install directory...${RESET}"
-mkdir -p "$INSTALL_DIR"
-
-# Copy binary
-echo -e "${YELLOW}[4/5] Installing binary...${RESET}"
+# Cek binary
 if [ ! -f "$BINARY_NAME" ]; then
-    echo -e "${RED}[!] Binary '$BINARY_NAME' not found in this folder.${RESET}"
+    echo -e "${RED}[!] Binary '$BINARY_NAME' tidak ditemukan${RESET}"
     exit 1
 fi
 
+# Beri izin run
+echo -e "${YELLOW}[1/3] Giving execute permission...${RESET}"
 chmod +x "$BINARY_NAME"
-cp "$BINARY_NAME" "$INSTALL_DIR/$BINARY_NAME"
+
+# Install dependencies
+echo -e "${YELLOW}[2/3] Installing dependencies...${RESET}"
+pkg update -y
+pkg install -y curl file git
+
+# Izin storage
+termux-setup-storage
+
+# Install ke bin
+echo -e "${YELLOW}[3/3] Installing to bin...${RESET}"
+mkdir -p "$INSTALL_DIR"
+cp "$BINARY_NAME" "$INSTALL_DIR/"
 chmod +x "$INSTALL_DIR/$BINARY_NAME"
 
-# Set PATH (hanya ditambah jika belum ada)
-echo -e "${YELLOW}[5/5] Setting PATH...${RESET}"
-grep -qxF "export PATH=\"$INSTALL_DIR:\$PATH\"" "$HOME/.zshrc" 2>/dev/null || \
-echo "export PATH=\"$INSTALL_DIR:\$PATH\"" >> "$HOME/.zshrc"
+# Setup PATH kalau belum ada
+if ! grep -q "export PATH=\"\$HOME/bin:\$PATH\"" "$HOME/.bashrc" 2>/dev/null; then
+    echo "export PATH=\"\$HOME/bin:\$PATH\"" >> "$HOME/.bashrc"
+fi
 
-grep -qxF "export PATH=\"$INSTALL_DIR:\$PATH\"" "$HOME/.bashrc" 2>/dev/null || \
-echo "export PATH=\"$INSTALL_DIR:\$PATH\"" >> "$HOME/.bashrc"
+if ! grep -q "export PATH=\"\$HOME/bin:\$PATH\"" "$HOME/.zshrc" 2>/dev/null; then
+    echo "export PATH=\"\$HOME/bin:\$PATH\"" >> "$HOME/.zshrc"
+fi
 
 export PATH="$INSTALL_DIR:$PATH"
 
@@ -62,9 +62,12 @@ echo -e "${GREEN}======================================${RESET}"
 echo -e "${GREEN}      INSTALL COMPLETED${RESET}"
 echo -e "${GREEN}======================================${RESET}"
 echo ""
-echo -e "Run binary with:"
-echo -e "  ${CYAN}$BINARY_NAME${RESET}"
+echo -e "Sekarang tinggal ketik: ${CYAN}enzox${RESET}"
 echo ""
-echo -e "If command not found, reload shell:"
-echo -e "  source ~/.zshrc"
-echo ""
+
+# Langsung jalanin kalau user mau
+echo -e "${CYAN}Jalankan sekarang? (y/n)${RESET}"
+read -r run_now
+if [[ "$run_now" == "y" || "$run_now" == "Y" ]]; then
+    exec "$INSTALL_DIR/$BINARY_NAME"
+fi
