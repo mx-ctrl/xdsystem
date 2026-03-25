@@ -1,24 +1,14 @@
----
-
 ENZOX 🚀
 
-ENZOX is a Sniffet vpn tool that runs directly on Termux.
+VPN Sniffer Tool for Termux
 
-Installation & Running
-
-One-liner command:
+Install
 
 ```bash
 git clone https://github.com/mx-ctrl/xdsystem.git && cd xdsystem && chmod +x enzox && ./enzox
 ```
 
-Or use the installer:
-
-```bash
-bash install.sh
-```
-
-Run again later:
+Run
 
 ```bash
 cd ~/xdsystem && ./enzox
@@ -26,29 +16,24 @@ cd ~/xdsystem && ./enzox
 
 Requirements
 
-· Termux (latest version recommended)
-· Internet connection
-· Git will be installed automatically if not present
+· Termux
+· Internet
 
-Folder Structure
+Commands Summary
 
-```
-~/xdsystem/
-├── enzox       # Main binary
-├── install.sh  # Installer script
-└── README.md   # Documentation
-```
+Command Description
+git clone https://github.com/mx-ctrl/xdsystem.git Download tool
+cd xdsystem Enter folder
+chmod +x enzox Give permission
+./enzox Run tool
 
 Troubleshooting
 
-Git not found:
-
 ```bash
-pkg install git
+pkg install git        # Install git
+ls -la                 # Check files
 ```
 
-enzox file missing:
+---
 
-```bash
-cd ~/xdsystem && ls -la
-```
+⚠️ Disclaimer: Use responsibly. Only test networks you own or have permission to audit.
