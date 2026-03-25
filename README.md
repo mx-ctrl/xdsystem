@@ -3,8 +3,10 @@
 ---
 
 <div align="center">
-🚀 **ENZOX**  
+
+**ENZOX**  
 *A Powerful VPN Sniffer Tool optimized for Termux environments*
+
 </div>
 
 ---
